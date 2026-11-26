@@ -1,0 +1,9 @@
+Clave,Valor
+Semilla,2026
+Rango de valores,[0 - 10000000]
+Limite por prueba (s),30
+Repeticiones maximas,5
+Elementos por lote,100000
+Compilador,GCC 11.2.0
+Optimizacion,Activada (-O2)
+Reloj,std::chrono::steady_clock
