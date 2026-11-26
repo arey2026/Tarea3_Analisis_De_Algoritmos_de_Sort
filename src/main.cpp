@@ -13,7 +13,14 @@ int main() {
     imprimirArreglo(ejemplo);
     std::cout << "Esta ordenado? " << (estaOrdenado(ejemplo) ? "si" : "no") << std::endl;
 
-    // En las fases 3 a 8 agregaremos aquí la demostración de cada algoritmo.
+    // Cada algoritmo recibe su PROPIA COPIA del arreglo original.
+    std::vector<int> copia = ejemplo;
+    insertionSort(copia);
+    std::cout << "\nInsertion Sort: ";
+    imprimirArreglo(copia);
+    std::cout << "Esta ordenado? " << (estaOrdenado(copia) ? "si" : "no") << std::endl;
+
+    // En las fases 4 a 8 agregaremos aquí los demás algoritmos.
 
     return 0;
 }

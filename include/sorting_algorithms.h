@@ -12,8 +12,13 @@
 
 #include <vector>
 
+// Tipo "puntero a función de ordenamiento": permite guardar los seis
+// algoritmos en una lista y recorrerlos en las pruebas y el benchmark.
+using FuncionSort = void (*)(std::vector<int>&);
+
 // ===== Algoritmos de ordenamiento =====
 // (se agregan uno por uno en las fases 3 a 8)
+void insertionSort(std::vector<int>& arr);   // src/insertion_sort.cpp
 
 
 // ===== Funciones auxiliares (src/utils.cpp) =====
