@@ -19,9 +19,14 @@ struct Algoritmo {
     FuncionSort funcion;
 };
 
-// Lista de algoritmos a probar. En cada fase agregamos uno nuevo.
+// Lista de los seis algoritmos a probar (todos en la clase SortingAlgorithms).
 const std::vector<Algoritmo> ALGORITMOS = {
-    {"Insertion Sort", insertionSort},
+    {"Insertion Sort", SortingAlgorithms::insertionSort},
+    {"Selection Sort", SortingAlgorithms::selectionSort},
+    {"Bubble Sort",    SortingAlgorithms::bubbleSort},
+    {"Merge Sort",     SortingAlgorithms::mergeSort},
+    {"Heap Sort",      SortingAlgorithms::heapSort},
+    {"Quick Sort",     SortingAlgorithms::quickSort},
 };
 
 // Un caso de prueba: una descripción y el arreglo de entrada.
@@ -69,6 +74,22 @@ std::vector<CasoPrueba> crearCasos() {
                      generarAleatorio(1000, 0, 20, 12345)});
     casos.push_back({"Aleatorio 5,000 (rango amplio)",
                      generarAleatorio(5000, -1000000, 1000000, 2026)});
+
+    // Arreglos grandes ordenados e inversos: son el peor caso de varios
+    // algoritmos (por ejemplo, Quick Sort con un mal pivote).
+    std::vector<int> ordenadoGrande(3000), inversoGrande(3000);
+    for (int i = 0; i < 3000; i++) {
+        ordenadoGrande[i] = i;
+        inversoGrande[i] = 3000 - i;
+    }
+    casos.push_back({"Ordenado 3,000", ordenadoGrande});
+    casos.push_back({"Inverso 3,000", inversoGrande});
+
+    // Tamaños impares/pares pequeños: revisan los límites de los índices.
+    for (int n = 3; n <= 17; n++) {
+        casos.push_back({"Aleatorio n=" + std::to_string(n),
+                         generarAleatorio(n, -10, 10, 100 + n)});
+    }
     return casos;
 }
 
