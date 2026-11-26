@@ -1,0 +1,11 @@
+# Ejecutables y archivos compilados (se generan con mingw32-make)
+*.exe
+*.o
+*.obj
+build/
+
+# Configuración local del editor
+.vscode/
+
+# Archivos temporales que crea Excel cuando el libro está abierto
+~$*.xlsx
