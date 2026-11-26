@@ -3,6 +3,8 @@
 #
 #   mingw32-make demo     -> compila y ejecuta la demostración (src/main.cpp)
 #   mingw32-make test     -> compila y ejecuta las pruebas (tests/test_sorting.cpp)
+#   mingw32-make benchmark -> mide los tiempos y genera results/resultados_sort.xlsx
+#   mingw32-make excel    -> regenera el Excel desde el CSV, sin volver a medir
 #   mingw32-make clean    -> borra los ejecutables generados
 
 CXX      = g++
@@ -24,9 +26,20 @@ else
     RM = rm -f
 endif
 
-.PHONY: all demo test clean
+.PHONY: all demo test benchmark excel clean
 
-all: demo.exe tests.exe
+all: demo.exe tests.exe benchmark.exe
+
+benchmark.exe: benchmarks/benchmark.cpp $(ALGO_SRCS) $(HEADERS)
+	$(CXX) $(CXXFLAGS) -o $@ benchmarks/benchmark.cpp $(ALGO_SRCS) $(LDFLAGS)
+
+# Ejecuta el benchmark completo (mide tiempos, crea CSV y Excel).
+benchmark: benchmark.exe
+	./benchmark.exe
+
+# Vuelve a crear el Excel a partir del CSV existente (sin medir de nuevo).
+excel:
+	powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generar_excel.ps1
 
 demo.exe: src/main.cpp $(ALGO_SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) -o $@ src/main.cpp $(ALGO_SRCS) $(LDFLAGS)
